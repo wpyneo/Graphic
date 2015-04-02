@@ -34,7 +34,13 @@ public class Shape {
 
 		for (int i = 0; i < shapeLines.size(); i++) {
 
-			g.setColor(Color.RED);
+			//this is to setup random color to fill a shape
+			float a = (float) Math.random();
+			float b = (float) Math.random();
+			float c = (float) Math.random();
+			System.out.println(a + " " + b + " " + c);
+
+			g.setColor(new Color(a, b, c));
 
 			drawLine(g, shapeLines.get(i).getStartPoint(), shapeLines.get(i)
 					.getEndPoint());
@@ -47,7 +53,7 @@ public class Shape {
 
 			System.out.println("Draw Line " + (i + 1));
 		}
-		g.setColor(Color.RED);
+//		g.setColor(Color.RED);
 		FillShape fs = new FillShape(shapeLines, d, 1, g);
 	}
 
