@@ -15,6 +15,7 @@ import fillingShape.FillShape;
 public class Shape {
 
 	private ArrayList<Line> shapeLines = new ArrayList<Line>();
+	private ArrayList<Line3D> shapeLines3D = new ArrayList<Line3D>();
 	private int layerNumber;
 	private Canvas c;
 	private Graphics g;
@@ -30,11 +31,21 @@ public class Shape {
 		this.d = d;
 	}
 
+	public Shape(int layer, Canvas c, Dimension d,
+			ArrayList<Line3D> shapeLines3D) {
+
+		this.shapeLines3D = shapeLines3D;
+		layerNumber = layer;
+		this.c = c;
+		g = c.getGraphics();
+		this.d = d;
+	}
+
 	public void drawShape() {
 
 		for (int i = 0; i < shapeLines.size(); i++) {
 
-			//this is to setup random color to fill a shape
+			// this is to setup random color to fill a shape
 			float a = (float) Math.random();
 			float b = (float) Math.random();
 			float c = (float) Math.random();
@@ -53,7 +64,7 @@ public class Shape {
 
 			System.out.println("Draw Line " + (i + 1));
 		}
-//		g.setColor(Color.RED);
+		// g.setColor(Color.RED);
 		FillShape fs = new FillShape(shapeLines, d, 1, g);
 	}
 
@@ -132,6 +143,15 @@ public class Shape {
 				CoordinateTransformer.calculateFrameX(d, (int) ep.getX()),
 				CoordinateTransformer.calculateFrameY(d, (int) ep.getY()));
 
+	}
+
+	// this is to check if this shape is covered by given shape
+	// 0 not covered at all
+	// 1 partially covered
+	// 2 totally covered
+	public int checkCover(Shape s) {
+
+		return 0;
 	}
 
 }
