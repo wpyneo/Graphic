@@ -180,6 +180,8 @@ public class MainFrame {
 		}
 	}
 
+	// this is to set the label content when change focus to Z value of
+	// coordinate 3d input
 	private class CoodFocus implements FocusListener {
 
 		@Override
@@ -200,6 +202,7 @@ public class MainFrame {
 
 	}
 
+	// this is to draw the shape with previously stored coodList2D.
 	private class Draw implements ActionListener {
 
 		@Override
@@ -207,11 +210,9 @@ public class MainFrame {
 			// TODO Auto-generated method stub
 
 			// draw Shape, for production
-
 			// DrawShape.Draw(c, coodList2D);
 
-			// only for testing
-
+			// draw Shape, only for testing
 			ArrayList<Coordinate3D> test3D = new ArrayList<Coordinate3D>();
 			test3D.add(new Coordinate3D(100, 200, 300));
 			test3D.add(new Coordinate3D(200, 300, 100));
@@ -232,6 +233,7 @@ public class MainFrame {
 
 	}
 
+	// this is the change label when change focus to transformation value
 	private class changeValueFocus implements FocusListener {
 
 		@Override
@@ -250,6 +252,7 @@ public class MainFrame {
 
 	}
 
+	//this is the action to perform Shape transformation
 	private class ShapeTransform implements ActionListener {
 
 		@Override
@@ -257,7 +260,7 @@ public class MainFrame {
 			// TODO Auto-generated method stub
 			// call Shape Transform
 			System.out.println(arg0.getActionCommand());
-			
+
 			double[] value = { Double.parseDouble(changeValueX.getText()),
 					Double.parseDouble(changeValueY.getText()),
 					Double.parseDouble(changeValueZ.getText()) };
@@ -280,7 +283,6 @@ public class MainFrame {
 				coodList3D = TransformShape.zoom(c, coodList3D, value);
 				System.out.println("Zoomed");
 			}
-			
 
 		}
 
