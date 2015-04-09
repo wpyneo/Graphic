@@ -31,7 +31,7 @@ public class TransformShape {
 		}
 
 		// draw new shape
-		DrawShape.Draw(c, shiftCoodList2D);
+		DrawShape.Draw(c, shiftCoodList2D, shiftCoodList3D);
 		return shiftCoodList3D;
 	}
 
@@ -61,7 +61,7 @@ public class TransformShape {
 		}
 
 		// draw new shape
-		DrawShape.Draw(c, rotateCoodList2D);
+		DrawShape.Draw(c, rotateCoodList2D, rotateCoodList3D);
 		return rotateCoodList3D;
 
 	}
@@ -91,7 +91,7 @@ public class TransformShape {
 		}
 
 		// draw new shape
-		DrawShape.Draw(c, zoomCoodList2D);
+		DrawShape.Draw(c, zoomCoodList2D, zoomCoodList3D);
 		return zoomCoodList3D;
 
 	}

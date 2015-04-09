@@ -1,23 +1,27 @@
 package transformation;
 
-public class Coordinate3D {
+import covering.Point3D;
+
+public class Coordinate3D extends Point3D {
 
 	private int x;
 	private int y;
 	private int z;
 	Coordinate2D c2d = null;
 
-	public Coordinate3D() {
-
-	}
+	// public Coordinate3D() {
+	//
+	// }
 
 	public Coordinate3D(int x, int y, int z) {
 
 		// create 3D coordinate by input
 
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		// this.x = x;
+		// this.y = y;
+		// this.z = z;
+
+		super(x, y, z);
 		calculate2DCoordinate();
 	}
 
@@ -27,11 +31,11 @@ public class Coordinate3D {
 		// so the offset should be the square root of (z^2)/2
 
 		if (z > 0) {
-			//positive part of Z axis
+			// positive part of Z axis
 			int offset = (int) Math.sqrt((z * z) / 2);
 			c2d = new Coordinate2D((x - offset), (y - offset));
 		} else {
-			//negative part of Z axis
+			// negative part of Z axis
 			int offset = -(int) Math.sqrt((z * z) / 2);
 			c2d = new Coordinate2D((x - offset), (y - offset));
 		}
@@ -39,18 +43,18 @@ public class Coordinate3D {
 	}
 
 	public int getX() {
-		return x;
+		return (int) x;
 	}
 
 	public int getY() {
-		return y;
+		return (int) y;
 	}
 
 	public int getZ() {
-		return z;
+		return (int) z;
 	}
 
-	//a projection of a 3D point to a 2D environment.
+	// a projection of a 3D point to a 2D environment.
 	public Coordinate2D getCoordinate2D() {
 		return c2d;
 	}

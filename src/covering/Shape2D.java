@@ -12,7 +12,7 @@ import edgeCutting.Line;
 import fillingShape.CoordinateTransformer;
 import fillingShape.FillShape;
 
-public class Shape {
+public class Shape2D {
 
 	private ArrayList<Line> shapeLines = new ArrayList<Line>();
 	private ArrayList<Line3D> shapeLines3D = new ArrayList<Line3D>();
@@ -22,7 +22,7 @@ public class Shape {
 	// private Path2D.Double path2d = new Path2D.Double();
 	private Dimension d;
 
-	public Shape(ArrayList<Line> shapeLines, int layer, Canvas c, Dimension d) {
+	public Shape2D(ArrayList<Line> shapeLines, int layer, Canvas c, Dimension d) {
 
 		this.shapeLines = shapeLines;
 		layerNumber = layer;
@@ -31,17 +31,18 @@ public class Shape {
 		this.d = d;
 	}
 
-	public Shape(int layer, Canvas c, Dimension d,
+	public Shape2D(Canvas c, Dimension d,
 			ArrayList<Line3D> shapeLines3D) {
 
 		this.shapeLines3D = shapeLines3D;
-		layerNumber = layer;
+//		layerNumber = layer;
 		this.c = c;
 		g = c.getGraphics();
 		this.d = d;
 	}
 
-	public void drawShape() {
+	//this is to draw shape with 2D points and 2D lines
+	public void drawShape2D() {
 
 		for (int i = 0; i < shapeLines.size(); i++) {
 
@@ -149,7 +150,7 @@ public class Shape {
 	// 0 not covered at all
 	// 1 partially covered
 	// 2 totally covered
-	public int checkCover(Shape s) {
+	public int checkCover(Shape2D s) {
 
 		return 0;
 	}

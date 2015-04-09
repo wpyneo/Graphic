@@ -22,7 +22,7 @@ public class Line3D {
 	// this is to check if this line is the same as the given Line3D
 	public boolean checkSame(Line3D l3d) {
 
-		if (sp.checkSame(l3d.getSp()) || ep.checkSame(l3d.getEp())) {
+		if (sp.checkSame(l3d.getSp()) && ep.checkSame(l3d.getEp())) {
 			return true;
 		}
 

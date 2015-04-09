@@ -117,25 +117,6 @@ public class MainFrame {
 			// draw the system
 			new CoordinateSystem(g);
 
-			// g.drawLine(CoordinateTransformer.calculateFrameX(-400),
-			// CoordinateTransformer.calculateFrameY(0),
-			// CoordinateTransformer.calculateFrameX(400),
-			// CoordinateTransformer.calculateFrameY(0));
-			// g.drawLine(CoordinateTransformer.calculateFrameX(0),
-			// CoordinateTransformer.calculateFrameY(300),
-			// CoordinateTransformer.calculateFrameX(0),
-			// CoordinateTransformer.calculateFrameY(-300));
-			//
-			// g.drawLine(CoordinateTransformer.calculateFrameX(new
-			// Coordinate3D(
-			// 0, 0, 300).getCoordinate2D().getX()), CoordinateTransformer
-			// .calculateFrameY(new Coordinate3D(0, 0, 300)
-			// .getCoordinate2D().getY()), CoordinateTransformer
-			// .calculateFrameX(new Coordinate3D(0, 0, -300)
-			// .getCoordinate2D().getX()), CoordinateTransformer
-			// .calculateFrameY(new Coordinate3D(0, 0, -300)
-			// .getCoordinate2D().getY()));
-
 		}
 	}
 
@@ -227,7 +208,7 @@ public class MainFrame {
 			test2D.add(new Coordinate3D(200, 300, 100).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(200, 100, 300).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(300, 100, 200).calculate2DCoordinate());
-			DrawShape.Draw(c, test2D);
+			DrawShape.Draw(c, test2D, test3D);
 			coodList2D = test2D;
 		}
 

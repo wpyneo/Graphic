@@ -2,7 +2,7 @@ package covering;
 
 import java.awt.Point;
 
-public class Point3D extends Point {
+public class Point3D {
 
 	private double x = 0;
 	private double y = 0;
@@ -14,7 +14,7 @@ public class Point3D extends Point {
 		this.z = z;
 	}
 
-	//check if this point is the same as the given point
+	// check if this point is the same as the given point
 	public boolean checkSame(Point3D p3d) {
 
 		if (x == p3d.getX() || y == p3d.getY() || z == p3d.getZ()) {
@@ -24,16 +24,16 @@ public class Point3D extends Point {
 		return false;
 	}
 
-	public double getX() {
-		return x;
+	public int getX() {
+		return (int) x;
 	}
 
-	public double getY() {
-		return y;
+	public int getY() {
+		return (int) y;
 	}
 
-	public double getZ() {
-		return z;
+	public int getZ() {
+		return (int) z;
 	}
 
 }

@@ -11,21 +11,21 @@ import edgeCutting.Line;
 public class CreateShapesOf3D {
 
 	private ArrayList<Line3D> lineList3D = new ArrayList<Line3D>();
-	private ArrayList<Shape> shappList3D = new ArrayList<Shape>();
+	private ArrayList<Surface> surfaceList3D = new ArrayList<Surface>();
 
-	private Canvas c;
-	private Graphics g;
+	private Shape3D finalShape3D;
+
 	private Dimension d;
 
 	// this is to fill in lineList3D of a shape
-	public CreateShapesOf3D(ArrayList<Coordinate3D> coodList3D, Canvas c,
-			Dimension d) {
+	public CreateShapesOf3D(ArrayList<Coordinate3D> coodList3D, Dimension d) {
 
 		fillLineList3D(coodList3D);
-		this.c = c;
-		this.g = c.getGraphics();
 		this.d = d;
 
+		createSurface(lineList3D);
+
+		finalShape3D = formShape3D(surfaceList3D);
 	}
 
 	// form the coodList3D into line list
@@ -76,7 +76,7 @@ public class CreateShapesOf3D {
 	}
 
 	// this is to create surfaces of a shape
-	public void createShape(ArrayList<Line3D> lineList3D) {
+	public void createSurface(ArrayList<Line3D> lineList3D) {
 
 		for (int i = 0; i < lineList3D.size(); i++) {
 			for (int j = 0; j < lineList3D.size(); j++) {
@@ -86,41 +86,93 @@ public class CreateShapesOf3D {
 					Line3D line2 = lineList3D.get(j);
 					Line3D line3 = lineList3D.get(k);
 
-					if (line1.checkSame(line2) || line2.checkSame(line3)
-							|| line1.checkSame(line3)) {
+					if (!line1.checkSame(line2) && !line2.checkSame(line3)
+							&& !line1.checkSame(line3)) {
 						// make sure all 3 lines are different
 
 						if ((line1.getSp().checkSame(line2.getSp()))
-								|| (line1.getEp().checkSame(line3.getSp()))
-								|| (line2.getEp().checkSame(line3.getEp()))) {
-							// 1 s = 2 s || 1 e = 3 s || 2 e = 3 e
+								&& (line1.getEp().checkSame(line3.getSp()))
+								&& (line2.getEp().checkSame(line3.getEp()))) {
+							// 1 s = 2 s && 1 e = 3 s && 2 e = 3 e
 
-							// add new shape
+							// form a surface with 3 lines
+							ArrayList<Line3D> surfaceLine3D = new ArrayList<Line3D>();
+							surfaceLine3D.add(line1);
+							surfaceLine3D.add(line2);
+							surfaceLine3D.add(line3);
 
-						} else if ((line1.getSp().checkSame(line2.getSp()))
-								|| (line1.getEp().checkSame(line3.getSp()))
-								|| (line2.getEp().checkSame(line3.getEp()))) {
-							// 1 s = 2 s || 1 e = 3 e || 2 e = 3 s
-
-							// add new shape
-
-						} else if ((line1.getSp().checkSame(line2.getSp()))
-								|| (line1.getEp().checkSame(line3.getSp()))
-								|| (line2.getEp().checkSame(line3.getEp()))) {
-							// 1 s = 2 e || 1 e = 3 s || 2 s = 3 e
-
-							// add new shape
+							surfaceList3D.add(new Surface(surfaceLine3D, d));
 
 						} else if ((line1.getSp().checkSame(line2.getSp()))
-								|| (line1.getEp().checkSame(line3.getSp()))
-								|| (line2.getEp().checkSame(line3.getEp()))) {
-							// 1 s = 2 e || 1 e = 3 e || 2 s = 3 s
+								&& (line1.getEp().checkSame(line3.getSp()))
+								&& (line2.getEp().checkSame(line3.getEp()))) {
+							// 1 s = 2 s && 1 e = 3 e && 2 e = 3 s
 
-							// add new shape
+							// form a surface with 3 lines
+							ArrayList<Line3D> surfaceLine3D = new ArrayList<Line3D>();
+							surfaceLine3D.add(line1);
+							surfaceLine3D.add(line2);
+							surfaceLine3D.add(line3);
+
+							surfaceList3D.add(new Surface(surfaceLine3D, d));
+
+						} else if ((line1.getSp().checkSame(line2.getSp()))
+								&& (line1.getEp().checkSame(line3.getSp()))
+								&& (line2.getEp().checkSame(line3.getEp()))) {
+							// 1 s = 2 e && 1 e = 3 s && 2 s = 3 e
+
+							// form a surface with 3 lines
+							ArrayList<Line3D> surfaceLine3D = new ArrayList<Line3D>();
+							surfaceLine3D.add(line1);
+							surfaceLine3D.add(line2);
+							surfaceLine3D.add(line3);
+
+							surfaceList3D.add(new Surface(surfaceLine3D, d));
+
+						} else if ((line1.getSp().checkSame(line2.getSp()))
+								&& (line1.getEp().checkSame(line3.getSp()))
+								&& (line2.getEp().checkSame(line3.getEp()))) {
+							// 1 s = 2 e && 1 e = 3 e && 2 s = 3 s
+
+							// form a surface with 3 lines
+							ArrayList<Line3D> surfaceLine3D = new ArrayList<Line3D>();
+							surfaceLine3D.add(line1);
+							surfaceLine3D.add(line2);
+							surfaceLine3D.add(line3);
+
+							surfaceList3D.add(new Surface(surfaceLine3D, d));
 						}
 					}
 				}
 			}
 		}
 	}
+
+	// this is to for a shape3D
+	public Shape3D formShape3D(ArrayList<Surface> surfaceList3D) {
+
+		ArrayList<Surface> realSurfaceList = new ArrayList<Surface>();
+
+		// add the first of the surface into surface list;
+		realSurfaceList.add(surfaceList3D.get(0));
+
+		for (int i = 0; i < surfaceList3D.size(); i++) {
+			for (int j = 0; j < realSurfaceList.size(); j++) {
+
+				if (!surfaceList3D.get(i).checkSame(realSurfaceList.get(j))) {
+					// if a surface is not in the RealSurfaceList, then add it
+					// into the list
+					realSurfaceList.add(surfaceList3D.get(i));
+
+				}
+			}
+		}
+
+		return new Shape3D(realSurfaceList);
+	}
+
+	public Shape3D getFinalShape3D() {
+		return finalShape3D;
+	}
+
 }

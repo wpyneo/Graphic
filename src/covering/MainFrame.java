@@ -35,9 +35,9 @@ public class MainFrame {
 	private JButton draw = new JButton("Draw");
 
 	// this is the current shape selected;
-	private Shape currentShape = null;
+	private Shape2D currentShape = null;
 	// this will hold all the shapes created;
-	private ArrayList<Shape> shapeList = new ArrayList<Shape>();
+	private ArrayList<Shape2D> shapeList = new ArrayList<Shape2D>();
 
 	// this is to hold all Shape Button;
 	private ArrayList<JButton> shapeButtonList = new ArrayList<JButton>();
@@ -196,14 +196,14 @@ public class MainFrame {
 
 			// g.draw3DRect(200, 300, 100, 100, true);
 
-			Shape newShape = new Shape(shapeLines, layer, c, d);
+			Shape2D newShape = new Shape2D(shapeLines, layer, c, d);
 			System.out.println("Layer " + layer);
 
 			// for testing
 			currentShape = newShape;
 
 			// draw new shape
-			newShape.drawShape();
+			newShape.drawShape2D();
 
 			// add this shape into shape list for covering order
 			shapeList.add(newShape);
@@ -233,7 +233,7 @@ public class MainFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			currentShape.drawShape();
+			currentShape.drawShape2D();
 		}
 		
 	}
