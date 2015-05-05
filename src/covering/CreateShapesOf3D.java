@@ -13,6 +13,9 @@ public class CreateShapesOf3D {
 	private ArrayList<Line3D> lineList3D = new ArrayList<Line3D>();
 	private ArrayList<Surface> surfaceList3D = new ArrayList<Surface>();
 
+	// surfaceList3D without duplicate shape
+	private ArrayList<Surface> realSurfaceList = new ArrayList<Surface>();
+
 	private Shape3D finalShape3D;
 
 	private Dimension d;
@@ -31,14 +34,23 @@ public class CreateShapesOf3D {
 	// form the coodList3D into line list
 	public void fillLineList3D(ArrayList<Coordinate3D> coodList3D) {
 
+		System.out.println(coodList3D.size());
+
 		for (int i = 0; i < coodList3D.size(); i++) {
-			for (int j = 0; j < coodList3D.size(); j++) {
+			for (int j = i; j < coodList3D.size(); j++) {
 
 				Point3D sp = new Point3D(coodList3D.get(i).getX(), coodList3D
 						.get(i).getY(), coodList3D.get(i).getZ());
 
 				Point3D ep = new Point3D(coodList3D.get(j).getX(), coodList3D
 						.get(j).getY(), coodList3D.get(j).getZ());
+
+//				System.out.println(coodList3D.get(i).getX() + " "
+//						+ coodList3D.get(i).getY() + " "
+//						+ coodList3D.get(i).getZ());
+//				System.out.println(coodList3D.get(j).getX() + " "
+//						+ coodList3D.get(j).getY() + " "
+//						+ coodList3D.get(j).getZ());
 
 				if (sp.checkSame(ep) == false) {
 					// make sure not to form a line with same Point
@@ -66,13 +78,21 @@ public class CreateShapesOf3D {
 							// if line3D doesn't exist, then add new line3D
 							lineList3D.add(l3d);
 						}
-					} else {
+					} else if (lineList3D.size() == 0) {
+
 						// if lineList3D is empty, then add the new line3D
 						lineList3D.add(l3d);
+						System.out.println("Add first line.");
+					} else {
+						System.out.println("No line added. Strange");
 					}
+				} else {
+					System.out.println("Point are same. move on!");
 				}
 			}
 		}
+
+		System.out.println(lineList3D.size());
 	}
 
 	// this is to create surfaces of a shape
@@ -139,12 +159,10 @@ public class CreateShapesOf3D {
 		}
 	}
 
-	// this is to for a shape3D by removing the duplicated surface in
+	// this is to form a shape3D by removing the duplicated surface in
 	// SurfaceList3D. If new version of createSurface works then this method can
 	// be removed.
 	public Shape3D formShape3D(ArrayList<Surface> surfaceList3D) {
-
-		ArrayList<Surface> realSurfaceList = new ArrayList<Surface>();
 
 		// add the first of the surface into surface list;
 		realSurfaceList.add(surfaceList3D.get(0));
@@ -166,6 +184,18 @@ public class CreateShapesOf3D {
 
 	public Shape3D getFinalShape3D() {
 		return finalShape3D;
+	}
+
+	public ArrayList<Surface> getSurfaceList3D() {
+		return surfaceList3D;
+	}
+
+	public ArrayList<Surface> getRealSurfaceList() {
+		return realSurfaceList;
+	}
+
+	public ArrayList<Line3D> getLineList3D() {
+		return lineList3D;
 	}
 
 }

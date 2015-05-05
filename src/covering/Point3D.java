@@ -17,7 +17,7 @@ public class Point3D {
 	// check if this point is the same as the given point
 	public boolean checkSame(Point3D p3d) {
 
-		if (x == p3d.getX() || y == p3d.getY() || z == p3d.getZ()) {
+		if (x == p3d.getX() && y == p3d.getY() && z == p3d.getZ()) {
 			return true;
 		}
 

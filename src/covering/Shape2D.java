@@ -66,6 +66,8 @@ public class Shape2D {
 			System.out.println("Draw Line " + (i + 1));
 		}
 		// g.setColor(Color.RED);
+		
+		//fill color to shape
 		FillShape fs = new FillShape(shapeLines, d, 1, g);
 	}
 
