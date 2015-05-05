@@ -11,6 +11,7 @@ public class Surface {
 	private Color c;
 	// private Path2D.Double path2d = new Path2D.Double();
 	private Dimension d;
+	private int depth;
 
 	public Surface(ArrayList<Line3D> surfaceLines3D, Dimension d) {
 
@@ -25,6 +26,7 @@ public class Surface {
 
 		this.c = new Color(a, b, c);
 		this.d = d;
+		calcualteAverageSurfaceDepth();
 	}
 
 	// this is to check if this surface is the same as the given one
@@ -51,6 +53,19 @@ public class Surface {
 		}
 	}
 
+	// this is to calculate the average z value of a shape
+	public void calcualteAverageSurfaceDepth() {
+
+		int surfaceDepth = 0;
+		for (int i = 0; i < line3DList.size(); i++) {
+			surfaceDepth += (line3DList.get(i).getLineDepth());
+		}
+		System.out.println("Surface depth is " + surfaceDepth);
+
+		depth = surfaceDepth / line3DList.size();
+
+	}
+
 	public ArrayList<Line3D> getSurfaceLines3D() {
 
 		return line3DList;
@@ -59,6 +74,9 @@ public class Surface {
 	public Color getC() {
 		return c;
 	}
-	
+
+	public int getSurfaceDepth() {
+		return depth;
+	}
 
 }

@@ -2,7 +2,7 @@ package transformation;
 
 import covering.Point3D;
 
-public class Coordinate3D{
+public class Coordinate3D extends Point3D {
 
 	private int x;
 	private int y;
@@ -16,12 +16,11 @@ public class Coordinate3D{
 	public Coordinate3D(int x, int y, int z) {
 
 		// create 3D coordinate by input
+		super(x, y, z);
+		this.x = x;
+		this.y = y;
+		this.z = z;
 
-		 this.x = x;
-		 this.y = y;
-		 this.z = z;
-
-//		super(x, y, z);
 		calculate2DCoordinate();
 	}
 

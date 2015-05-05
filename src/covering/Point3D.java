@@ -36,4 +36,7 @@ public class Point3D {
 		return (int) z;
 	}
 
+	public String toString() {
+		return x + " " + y + " " + z;
+	}
 }
