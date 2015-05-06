@@ -11,6 +11,7 @@ import edgeCutting.Line;
 public class CreateShapesOf3D {
 
 	private ArrayList<Line3D> lineList3D = new ArrayList<Line3D>();
+
 	private ArrayList<Surface> surfaceList3D = new ArrayList<Surface>();
 
 	// surfaceList3D without duplicate shape
@@ -20,15 +21,19 @@ public class CreateShapesOf3D {
 
 	private Dimension d;
 
+	private Graphics g;
+
 	// this is to fill in lineList3D of a shape
-	public CreateShapesOf3D(ArrayList<Coordinate3D> coodList3D, Dimension d) {
+	public CreateShapesOf3D(ArrayList<Coordinate3D> coodList3D, Dimension d,
+			Graphics g) {
 
 		fillLineList3D(coodList3D);
 		this.d = d;
+		this.g = g;
 
 		createSurface(lineList3D);
 
-		finalShape3D = new Shape3D(surfaceList3D);
+		finalShape3D = new Shape3D(surfaceList3D, g);
 	}
 
 	// form the coodList3D into line list
@@ -198,7 +203,11 @@ public class CreateShapesOf3D {
 							surfaceLine3D.add(line2);
 							surfaceLine3D.add(line3);
 
-							Surface ns = new Surface(surfaceLine3D, d);
+							 Surface ns = new Surface(surfaceLine3D, d);
+
+							// without Dimension input;
+//							Surface ns = new Surface(surfaceLine3D);
+
 							System.out.println(ns.getSurfaceDepth());
 							surfaceList3D.add(ns);
 							System.out.println();

@@ -3,10 +3,10 @@ package transformation;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -28,6 +28,8 @@ public class MainFrame {
 	private JTextField yValue = new JTextField("Y Axis");
 	private JTextField zValue = new JTextField("Z Axis");
 	private JButton draw = new JButton("Draw");
+	
+	private Dimension d = new Dimension();
 
 	// input the change value, like move 200pixel, or zoom 2 times, or rotate Pi
 	// degree
@@ -56,6 +58,7 @@ public class MainFrame {
 		// Create Frame and canvas
 
 		c = new C();
+		d.setSize(900, 700);
 		frame.setSize(900, 700);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
@@ -195,20 +198,24 @@ public class MainFrame {
 
 			// draw Shape, only for testing
 			ArrayList<Coordinate3D> test3D = new ArrayList<Coordinate3D>();
-			test3D.add(new Coordinate3D(100, 200, 300));
+
+			test3D.add(new Coordinate3D(100, 200, 350));
 			test3D.add(new Coordinate3D(200, 300, 100));
 			test3D.add(new Coordinate3D(200, 100, 300));
-			test3D.add(new Coordinate3D(300, 100, 200));
+			test3D.add(new Coordinate3D(300, 100, 250));
 
 			coodList3D = test3D;
 
 			ArrayList<Coordinate2D> test2D = new ArrayList<Coordinate2D>();
 
-			test2D.add(new Coordinate3D(100, 200, 300).calculate2DCoordinate());
+			test2D.add(new Coordinate3D(100, 200, 350).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(200, 300, 100).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(200, 100, 300).calculate2DCoordinate());
-			test2D.add(new Coordinate3D(300, 100, 200).calculate2DCoordinate());
-			DrawShape.Draw(c, test2D, test3D);
+			test2D.add(new Coordinate3D(300, 100, 250).calculate2DCoordinate());
+			// DrawShape.Draw(c, test2D, test3D);
+
+			DrawShape.DrawWithCover(c, test2D, test3D, d);
+
 			coodList2D = test2D;
 		}
 
@@ -233,7 +240,7 @@ public class MainFrame {
 
 	}
 
-	//this is the action to perform Shape transformation
+	// this is the action to perform Shape transformation
 	private class ShapeTransform implements ActionListener {
 
 		@Override

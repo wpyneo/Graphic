@@ -2,55 +2,61 @@ package edgeCutting;
 
 import java.awt.Point;
 
+import transformation.Coordinate2D;
+
 public class Line {
 
-	private Point pA = null;
-	private Point pB = null;
+	private Point sp = null;
+	private Point ep = null;
 	private boolean cutStatus = false;
 	private int lineNumber = 0;
 
 	// this is to define the edge of the shape
 	public Line(int lineNumber, Point s, Point e) {
 
-		this.pA = s;
-		this.pB = e;
+		this.sp = s;
+		this.ep = e;
 		setLineNumber(lineNumber);
 	}
 
-	// this is to defind the edge of the window
 	public Line(Point s, Point e) {
-		this.pA = s;
-		this.pB = e;
+		this.sp = s;
+		this.ep = e;
+	}
+
+	public Line(Coordinate2D s, Coordinate2D e) {
+		this.sp = new Point(s.getX(), s.getY());
+		this.ep = new Point(e.getX(), e.getY());
 	}
 
 	public Line(Line line) {
-		this.pA = line.getStartPoint();
-		this.pB = line.getEndPoint();
+		this.sp = line.getStartPoint();
+		this.ep = line.getEndPoint();
 	}
 
 	// to get the start point of a line
 	public Point getStartPoint() {
-		return pA;
+		return sp;
 	}
 
 	// to get the end point of a line
 	public Point getEndPoint() {
-		return pB;
+		return ep;
 	}
 
 	// to get the gradient of a line
 	public double getGradient() {
 
-		if (pA.getX() != pB.getX()) {
-			return (pA.getY() - pB.getY()) / (pA.getX() - pB.getX());
+		if (sp.getX() != ep.getX()) {
+			return (sp.getY() - ep.getY()) / (sp.getX() - ep.getX());
 		}
 		return 999999999;
 	}
 
 	public int getB() {
 
-		return (int) ((pB.getX() * pA.getY() - pA.getX() * pB.getY()) / (pB
-				.getX() - pA.getX()));
+		return (int) ((ep.getX() * sp.getY() - sp.getX() * ep.getY()) / (ep
+				.getX() - sp.getX()));
 
 	}
 
@@ -85,15 +91,20 @@ public class Line {
 	// this is to test if input line is the same as myself.
 	public boolean CompareLine(Line line) {
 
-		if (line.getStartPoint().getX() == pA.getX()
-				&& line.getStartPoint().getY() == pA.getY()
-				&& line.getEndPoint().getX() == pB.getX()
-				&& line.getEndPoint().getY() == pB.getY()
+		if (line.getStartPoint().getX() == sp.getX()
+				&& line.getStartPoint().getY() == sp.getY()
+				&& line.getEndPoint().getX() == ep.getX()
+				&& line.getEndPoint().getY() == ep.getY()
 				&& line.getGradient() == getGradient()) {
 
 			return true;
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return "SP is " + sp.getX() + " " + sp.getX() + " EP is " + ep.getX()
+				+ " " + ep.getY();
 	}
 }

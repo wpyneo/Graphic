@@ -20,16 +20,8 @@ public class DrawShape {
 		// retrieve points collected from input
 		pointList = coodList2D.toArray();
 
-		// print out each point
-		// while (it.hasNext()) {
-		// Coordinate2D c2d = it.next();
-		// System.out.println(c2d.getX());
-		// System.out.println(c2d.getY());
-		// }
-
-		g.clearRect(0, 0, 1280, 800);
-
 		// clear original shape
+		g.clearRect(0, 0, 1280, 800);
 		new CoordinateSystem(g);
 
 		// draw new shape with inputed CoodList2D
@@ -59,12 +51,6 @@ public class DrawShape {
 		// retrieve points collected from input
 		pointList = coodList2D.toArray();
 
-		// print out each point
-		// while (it.hasNext()) {
-		// Coordinate2D c2d = it.next();
-		// System.out.println(c2d.getX());
-		// System.out.println(c2d.getY());
-		// }
 
 		// clear original shape and restore coordinate System
 		g.clearRect(0, 0, 1280, 800);
@@ -72,7 +58,10 @@ public class DrawShape {
 
 		// draw new shape with inputed CoodList3D
 
-		Shape3D s3d = new CreateShapesOf3D(coodList3D, d).getFinalShape3D();
+		Shape3D s3d = new CreateShapesOf3D(coodList3D, d, g).getFinalShape3D();
+		
+		s3d.fillSurfaceByDepth();
 
 	}
+	
 }
