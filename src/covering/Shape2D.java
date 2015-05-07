@@ -65,10 +65,9 @@ public class Shape2D {
 
 			System.out.println("Draw Line " + (i + 1));
 		}
-		// g.setColor(Color.RED);
 		
 		//fill color to shape
-		FillShape fs = new FillShape(shapeLines, d, 1, g);
+		FillShape fs = new FillShape(shapeLines, d, 5, g);
 	}
 
 	// this is to check if the given point is within the shape

@@ -37,11 +37,12 @@ public class Shape3D {
 		}
 	}
 
+	// this is will the shape by Depth
 	public void fillSurfaceByDepth() {
 
 		for (int i = 0; i < sfl.length; i++) {
 			System.out.println(((Surface) sfl[i]).getSurfaceDepth());
-			// System.out.println(((Surface)sfl[i]).getC());
+
 			Color c = ((Surface) sfl[i]).getC();
 
 			g.setColor(c);

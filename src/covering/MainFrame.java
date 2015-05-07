@@ -179,7 +179,7 @@ public class MainFrame {
 					sp = new Point(a, b);
 					mp = sp;
 
-				} else if (i == (j)) {
+				} else if (i == j) {
 					// in the end, draw line with last point with start point;
 					shapeLines.add(new Line(mp, sp));
 					System.out.println(mp.getX() + " " + mp.getY() + ", "
