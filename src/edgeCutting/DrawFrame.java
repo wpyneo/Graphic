@@ -28,7 +28,7 @@ public class DrawFrame {
 
 		// create frame
 		frame.setSize(800, 600);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
 		frame.setLayout(new BorderLayout());

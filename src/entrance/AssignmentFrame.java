@@ -1,13 +1,13 @@
-package old2;
+package entrance;
 
-public class Assignment1Q2 {
+public class AssignmentFrame {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ThreeD d = new ThreeD();
+		CreateFrame cf = new CreateFrame();
 	}
 
 }

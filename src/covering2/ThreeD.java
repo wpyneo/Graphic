@@ -1,25 +1,22 @@
-package old2;
+package covering2;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import old.Block;
 
 public class ThreeD {
 
 	private JFrame frame = new JFrame();
 	private Canvas originalC = null;
+	private Dimension d = null;
 
 	public ThreeD() {
 
@@ -28,8 +25,9 @@ public class ThreeD {
 		originalC.setBackground(Color.white);
 
 		// Create Frame
-		frame.setSize(1024, 768);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		d = new Dimension(1024, 800);
+		frame.setSize(d);
+//		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 
@@ -62,14 +60,14 @@ public class ThreeD {
 			// get the point which mouse clicked on the available area
 			Point fp = me.getPoint();
 			// print out the position of the mouse click point
-			System.out.println(fp.getX() + " " + fp.getY());
+			System.out.println("Front Point is " + fp.getX() + " " + fp.getY());
 
 			// test if the point is out of range
 			Point bp = getPoints(fp);
 			if (bp.getX() != 0.0) {
 				// print out the new block based on the point clicked
 				Block b = new Block();
-				b.getBlock(fp, bp, g);
+				b.getBlock(fp, bp, g, d);
 			}
 		}
 
@@ -98,14 +96,14 @@ public class ThreeD {
 		int newY = 0;
 
 		// setup the available range
-		if ((int) y > 250 && (int) y < 550 && (int) x > 0 && (int) x < 800) {
+		if ((int) y > 250 && (int) y < 550 && (int) x > 99 && (int) x < 900) {
 			// calculate the new position of the back panel middle point base on
 			// the front panel middle point, which is the mouse click point
 			newX = Math.abs((400 - x) * 6 / 7 - 400);
 			newY = Math.abs((400 - y) * 6 / 7 - 400);
 			// print out the position of both point
-			System.out.println(x + " " + y);
-			System.out.println(newX + " " + newY);
+
+			System.out.println("Rear Point is " + newX + " " + newY);
 			return new Point(newX, newY);
 		} else {
 			// pop out a message when point is out of range.

@@ -27,7 +27,7 @@ import javax.swing.JRadioButton;
 
 import edgeCutting.Line;
 
-public class MainFrame {
+public class FillMainFrame {
 
 	// store all point list and line list.
 	private ArrayList<Point> pointList = new ArrayList<Point>();
@@ -64,7 +64,7 @@ public class MainFrame {
 	// return the current resolution parameter
 	private int p;
 
-	public MainFrame() {
+	public FillMainFrame() {
 
 		// setup Dimension
 
@@ -75,7 +75,7 @@ public class MainFrame {
 		c.addMouseListener(new ShapePoint());
 		frame.setSize(d);
 
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		c.addComponentListener(new ResizeListener());

@@ -1,4 +1,4 @@
-package old2;
+package covering2;
 
 import java.awt.Canvas;
 import java.awt.Graphics2D;

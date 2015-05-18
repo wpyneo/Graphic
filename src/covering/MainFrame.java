@@ -51,7 +51,7 @@ public class MainFrame {
 		mainFrame.setSize(d);
 		mainFrame.setLayout(new BorderLayout());
 
-		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
+//		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setVisible(true);
 

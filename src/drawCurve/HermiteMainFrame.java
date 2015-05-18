@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 import fillingShape.CoordinateTransformer;
 
-public class MainFrame {
+public class HermiteMainFrame {
 
 	// store all point list and line list.
 	private double[][] pointList = new double[2][4];
@@ -61,7 +61,7 @@ public class MainFrame {
 	// shouldn't exceed 4.
 	private int clickCount = 0;
 
-	public MainFrame() {
+	public HermiteMainFrame() {
 
 		// setup Dimension
 
@@ -72,7 +72,7 @@ public class MainFrame {
 		c.addMouseListener(new ShapePoint());
 		frame.setSize(d);
 
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		c.addComponentListener(new ResizeListener());

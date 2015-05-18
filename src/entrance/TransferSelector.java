@@ -1,4 +1,4 @@
-package old;
+package entrance;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
