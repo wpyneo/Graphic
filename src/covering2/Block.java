@@ -106,83 +106,83 @@ public class Block {
 		rearPanelLine.add(rlc);
 		rearPanelLine.add(rld);
 
-		// get Lines for left panel
+		// get Lines for bottom left panel
 		Line lla = new Line(rpa, fpa);
 		Line llb = new Line(fpa, fpd);
 		Line llc = new Line(fpd, rpd);
 		Line lld = new Line(rpd, rpa);
 
-		// get Arraylist created to draw left panel
-		ArrayList<Line> leftPanelLine = new ArrayList<Line>();
-		leftPanelLine.add(lla);
-		leftPanelLine.add(llb);
-		leftPanelLine.add(llc);
-		leftPanelLine.add(lld);
+		// get Arraylist created to draw bottom left panel
+		ArrayList<Line> bottomLeftPanelLine = new ArrayList<Line>();
+		bottomLeftPanelLine.add(lla);
+		bottomLeftPanelLine.add(llb);
+		bottomLeftPanelLine.add(llc);
+		bottomLeftPanelLine.add(lld);
 
-		// get Lines for top panel
+		// get Lines for top left panel
 		Line tla = new Line(rpa, fpa);
 		Line tlb = new Line(fpa, fpb);
 		Line tlc = new Line(fpb, rpb);
 		Line tld = new Line(rpb, rpa);
 
-		// get Arraylist created to draw top panel
-		ArrayList<Line> topPanelLine = new ArrayList<Line>();
-		topPanelLine.add(tla);
-		topPanelLine.add(tlb);
-		topPanelLine.add(tlc);
-		topPanelLine.add(tld);
+		// get Arraylist created to draw top left panel
+		ArrayList<Line> topLeftPanelLine = new ArrayList<Line>();
+		topLeftPanelLine.add(tla);
+		topLeftPanelLine.add(tlb);
+		topLeftPanelLine.add(tlc);
+		topLeftPanelLine.add(tld);
 
-		// get Lines for right panel
+		// get Lines for top right panel
 		Line rila = new Line(rpb, fpb);
 		Line rilb = new Line(fpb, fpc);
 		Line rilc = new Line(fpc, rpc);
 		Line rild = new Line(rpc, rpb);
 
-		// get Arraylist created to draw right panel
-		ArrayList<Line> rightPanelLine = new ArrayList<Line>();
-		rightPanelLine.add(rila);
-		rightPanelLine.add(rilb);
-		rightPanelLine.add(rilc);
-		rightPanelLine.add(rild);
+		// get Arraylist created to draw top right panel
+		ArrayList<Line> topRightPanelLine = new ArrayList<Line>();
+		topRightPanelLine.add(rila);
+		topRightPanelLine.add(rilb);
+		topRightPanelLine.add(rilc);
+		topRightPanelLine.add(rild);
 
-		// get Lines for bottom panel
+		// get Lines for bottom right panel
 		Line bla = new Line(rpd, fpd);
 		Line blb = new Line(fpd, fpc);
 		Line blc = new Line(fpc, rpc);
 		Line bld = new Line(rpc, rpd);
 
-		// get Arraylist created to draw bottom panel
-		ArrayList<Line> bottomPanelLine = new ArrayList<Line>();
-		bottomPanelLine.add(bla);
-		bottomPanelLine.add(blb);
-		bottomPanelLine.add(blc);
-		bottomPanelLine.add(bld);
+		// get Arraylist created to draw bottom right panel
+		ArrayList<Line> bottomRightPanelLine = new ArrayList<Line>();
+		bottomRightPanelLine.add(bla);
+		bottomRightPanelLine.add(blb);
+		bottomRightPanelLine.add(blc);
+		bottomRightPanelLine.add(bld);
 
 		if (fp.getX() < 500) {
 			if (fp.getY() < 400) {
 				leftG.setColor(Color.RED);
 				FillShape rbs = new FillShape(rearPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLUE);
-				FillShape lbs = new FillShape(leftPanelLine, d, 1, leftG);
+				FillShape blbs = new FillShape(bottomLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLACK);
-				FillShape tbs = new FillShape(topPanelLine, d, 1, leftG);
+				FillShape tlbs = new FillShape(topLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.CYAN);
-				FillShape ribs = new FillShape(rightPanelLine, d, 1, leftG);
+				FillShape trbs = new FillShape(topRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.GRAY);
-				FillShape bbs = new FillShape(bottomPanelLine, d, 1, leftG);
+				FillShape brbs = new FillShape(bottomRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.ORANGE);
 				FillShape fbs = new FillShape(frontPanelLine, d, 1, leftG);
 			} else if (fp.getY() >= 400) {
 				leftG.setColor(Color.RED);
 				FillShape rbs = new FillShape(rearPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLACK);
-				FillShape lbs = new FillShape(topPanelLine, d, 1, leftG);
+				FillShape tlbs = new FillShape(topLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.CYAN);
-				FillShape bbs = new FillShape(rightPanelLine, d, 1, leftG);
+				FillShape blbs = new FillShape(bottomLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLUE);
-				FillShape tbs = new FillShape(leftPanelLine, d, 1, leftG);
+				FillShape brbs = new FillShape(bottomRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.GRAY);
-				FillShape ribs = new FillShape(bottomPanelLine, d, 1, leftG);
+				FillShape trbs = new FillShape(topRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.ORANGE);
 				FillShape fbs = new FillShape(frontPanelLine, d, 1, leftG);
 			}
@@ -192,13 +192,13 @@ public class Block {
 				leftG.setColor(Color.RED);
 				FillShape rbs = new FillShape(rearPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLUE);
-				FillShape tbs = new FillShape(leftPanelLine, d, 1, leftG);
+				FillShape brbs = new FillShape(bottomRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.GRAY);
-				FillShape ribs = new FillShape(bottomPanelLine, d, 1, leftG);
+				FillShape trbs = new FillShape(topRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLACK);
-				FillShape lbs = new FillShape(topPanelLine, d, 1, leftG);
+				FillShape tlbs = new FillShape(topLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.CYAN);
-				FillShape bbs = new FillShape(rightPanelLine, d, 1, leftG);
+				FillShape blbs = new FillShape(bottomLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.ORANGE);
 				FillShape fbs = new FillShape(frontPanelLine, d, 1, leftG);
 
@@ -206,13 +206,13 @@ public class Block {
 				leftG.setColor(Color.RED);
 				FillShape rbs = new FillShape(rearPanelLine, d, 1, leftG);
 				leftG.setColor(Color.CYAN);
-				FillShape ribs = new FillShape(rightPanelLine, d, 1, leftG);
+				FillShape brbs = new FillShape(bottomRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.GRAY);
-				FillShape bbs = new FillShape(bottomPanelLine, d, 1, leftG);
+				FillShape trbs = new FillShape(topRightPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLUE);
-				FillShape lbs = new FillShape(leftPanelLine, d, 1, leftG);
+				FillShape blbs = new FillShape(bottomLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.BLACK);
-				FillShape tbs = new FillShape(topPanelLine, d, 1, leftG);
+				FillShape tlbs = new FillShape(topLeftPanelLine, d, 1, leftG);
 				leftG.setColor(Color.ORANGE);
 				FillShape fbs = new FillShape(frontPanelLine, d, 1, leftG);
 			}

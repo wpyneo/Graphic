@@ -1,7 +1,9 @@
 package edgeCutting;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class CreateShape {
 
@@ -23,6 +28,13 @@ public class CreateShape {
 	private DrawFrame df = null;
 	private ArrayList<Line> allLines = new ArrayList<Line>();
 
+	// Instruction Panel
+	private JPanel instructionPanel = new JPanel();
+	private JLabel titleLabel = new JLabel("剪裁");
+	private JTextArea instructionsLabel = new JTextArea(
+			"屏幕中心的黑框为可见窗口，请在屏幕随意点两个以上的点。之后点击“Create Shape”生成图形。"
+					+ "点击“Cut Visable Area”来进行剪裁。点击“Clear”可以重新画图。");
+
 	public CreateShape() {
 		// initialize the frame
 		createShapePoint();
@@ -34,17 +46,27 @@ public class CreateShape {
 
 		frame = df.getFrame();
 
+		// add instruction panel
+		instructionPanel.setLayout(new GridLayout(2, 1));
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
+		titleLabel.setFont(new Font("Title", Font.BOLD, 30));
+		instructionsLabel.setEditable(false);
+		instructionsLabel.setLineWrap(true);
+		instructionPanel.add(titleLabel);
+		instructionPanel.add(instructionsLabel);
+		frame.add(instructionPanel, BorderLayout.NORTH);
+
 		// add button to bottom of the frame and add action
 		createButton.addActionListener(new CreateButtonAction());
 		df.getPanel().add(createButton);
 
-		// add button to clear the area
-		clearButton.addActionListener(new ClearButtonAction());
-		df.getPanel().add(clearButton);
-
 		// add button to cut visible area
 		cutButton.addActionListener(new CutButtonAction());
 		df.getPanel().add(cutButton);
+
+		// add button to clear the area
+		clearButton.addActionListener(new ClearButtonAction());
+		df.getPanel().add(clearButton);
 
 		// add button to show the summary
 		summary.addActionListener(new Summary());

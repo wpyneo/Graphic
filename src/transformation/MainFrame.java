@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,13 +14,18 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 public class MainFrame {
 
@@ -28,7 +34,7 @@ public class MainFrame {
 	private JTextField yValue = new JTextField("Y Axis");
 	private JTextField zValue = new JTextField("Z Axis");
 	private JButton draw = new JButton("Draw");
-	
+
 	private Dimension d = new Dimension();
 
 	// input the change value, like move 200pixel, or zoom 2 times, or rotate Pi
@@ -48,6 +54,12 @@ public class MainFrame {
 	private JPanel changePanel = new JPanel();
 	private JPanel mainPanel = new JPanel();
 
+	// Instruction Panel
+	private JPanel instructionPanel = new JPanel();
+	private JLabel titleLabel = new JLabel("图形变换");
+	private JTextArea instructionsLabel = new JTextArea(
+			"在屏幕左侧可以输入3D坐标，但是为了方面展示，所以设定了一组测试坐标，直接点击右下方的Draw即可。在屏幕的下方可以填入需要变换的参数以及选择变换的种类。请注意输入角度时，需要输入弧度制，例如：如果要输入180度，则要输入 3.14， 1 Pi");
+
 	private Canvas c = null;
 	// rectangle
 	// this is to hold all the 3D coordinate input.
@@ -60,12 +72,22 @@ public class MainFrame {
 		c = new C();
 		d.setSize(900, 700);
 		frame.setSize(900, 700);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 
 		// add canvas to frame
 		frame.add(c, BorderLayout.CENTER);
+
+		// add instruction panel
+		instructionPanel.setLayout(new GridLayout(2, 1));
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
+		titleLabel.setFont(new Font("Title", Font.BOLD, 30));
+		instructionsLabel.setEditable(false);
+		instructionsLabel.setLineWrap(true);
+		instructionPanel.add(titleLabel);
+		instructionPanel.add(instructionsLabel);
+		frame.add(instructionPanel, BorderLayout.NORTH);
 
 		// create input panel to hold input coordinate
 
@@ -94,6 +116,9 @@ public class MainFrame {
 		shift.addActionListener(new ShapeTransform());
 		rotate.addActionListener(new ShapeTransform());
 		zoom.addActionListener(new ShapeTransform());
+		changeValueX.addFocusListener(new BlankTextField());
+		changeValueY.addFocusListener(new BlankTextField());
+		changeValueZ.addFocusListener(new BlankTextField());
 
 		// create value change Panel
 		changePanel.setLayout(new FlowLayout());
@@ -109,6 +134,7 @@ public class MainFrame {
 
 		frame.add(mainPanel, BorderLayout.SOUTH);
 		frame.add(coordinateInputPanel, BorderLayout.EAST);
+
 	}
 
 	public JTextField getxValue() {
@@ -212,9 +238,9 @@ public class MainFrame {
 			test2D.add(new Coordinate3D(200, 300, 100).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(200, 100, 300).calculate2DCoordinate());
 			test2D.add(new Coordinate3D(300, 100, 250).calculate2DCoordinate());
-			// DrawShape.Draw(c, test2D, test3D);
+			DrawShape.Draw(c, test2D, test3D);
 
-			DrawShape.DrawWithCover(c, test2D, test3D, d);
+			// DrawShape.DrawWithCover(c, test2D, test3D, d);
 
 			coodList2D = test2D;
 		}
@@ -248,32 +274,86 @@ public class MainFrame {
 			// TODO Auto-generated method stub
 			// call Shape Transform
 			System.out.println(arg0.getActionCommand());
+			try {
+				double[] value = { Double.parseDouble(changeValueX.getText()),
+						Double.parseDouble(changeValueY.getText()),
+						Double.parseDouble(changeValueZ.getText()) };
 
-			double[] value = { Double.parseDouble(changeValueX.getText()),
-					Double.parseDouble(changeValueY.getText()),
-					Double.parseDouble(changeValueZ.getText()) };
+				if (arg0.getActionCommand().equalsIgnoreCase("shift")) {
 
-			if (arg0.getActionCommand().equalsIgnoreCase("shift")) {
+					System.out.println("perform shift");
+					coodList3D = TransformShape.shift(c, coodList3D, value);
 
-				System.out.println("perform shift");
-				coodList3D = TransformShape.shift(c, coodList3D, value);
+					System.out.println("shifted");
 
-				System.out.println("shifted");
+				} else if (arg0.getActionCommand().equalsIgnoreCase("rotate")) {
 
-			} else if (arg0.getActionCommand().equalsIgnoreCase("rotate")) {
+					System.out.println("perform Rotate");
+					coodList3D = TransformShape.rotate(c, coodList3D, value);
+					System.out.println("Rotated");
 
-				System.out.println("perform Rotate");
-				coodList3D = TransformShape.rotate(c, coodList3D, value);
-				System.out.println("Rotated");
+				} else if (arg0.getActionCommand().equalsIgnoreCase("Zoom")) {
+					System.out.println("perform Zoom");
+					coodList3D = TransformShape.zoom(c, coodList3D, value);
+					System.out.println("Zoomed");
+				}
 
-			} else if (arg0.getActionCommand().equalsIgnoreCase("Zoom")) {
-				System.out.println("perform Zoom");
-				coodList3D = TransformShape.zoom(c, coodList3D, value);
-				System.out.println("Zoomed");
+			} catch (NumberFormatException e) {
+				notificationLabel
+				.setText("三个变换值都需要填。如果不需要请填0。");
+		notificationLabel.setForeground(Color.RED);
 			}
+		}
+
+	}
+
+	// this is the action to set black to current selected Text Field
+	private class BlankTextField implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+			JTextField tField = (JTextField) e.getSource();
+			tField.selectAll();
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			// TODO Auto-generated method stub
 
 		}
 
 	}
 
+	private class BlankYTextField implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+			changeValueY = new JTextField("");
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+	private class BlankZTextField implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+			zValue = new JTextField("");
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
 }

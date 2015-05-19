@@ -3,6 +3,7 @@ package fillingShape;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -24,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 
 import edgeCutting.Line;
 
@@ -43,6 +45,12 @@ public class FillMainFrame {
 	private JRadioButton mediumResolution = new JRadioButton(
 			"Medium Resolution");
 	private JRadioButton lowResolution = new JRadioButton("Low Resolution");
+	
+	// Instruction Panel
+	private JPanel instructionPanel = new JPanel();
+	private JLabel titleLabel = new JLabel("填充与反混淆");
+	private JTextArea instructionsLabel = new JTextArea(
+			"请在屏幕随意点三个以上的点。之后点击“Draw”生成图形。在左下方选择不同的分辨率，之后选择“Fill”进行填充。之后更换分辨率还可以继续填充。点击“Clear”可以重新画图。高分辨率可以有效的反混淆");
 
 	// Command Button initialization
 
@@ -82,6 +90,16 @@ public class FillMainFrame {
 
 		// add canvas to frame
 		frame.add(c, BorderLayout.CENTER);
+		
+		// add instruction panel
+		instructionPanel.setLayout(new GridLayout(2, 1));
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
+		titleLabel.setFont(new Font("Title", Font.BOLD, 30));
+		instructionsLabel.setEditable(false);
+		instructionsLabel.setLineWrap(true);
+		instructionPanel.add(titleLabel);
+		instructionPanel.add(instructionsLabel);
+		frame.add(instructionPanel, BorderLayout.NORTH);
 
 		// create button panel to hold button
 		buttonPanel.setLayout(new GridLayout(1, 4));

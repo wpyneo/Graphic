@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -23,7 +24,7 @@ import javax.swing.JTextField;
 
 import fillingShape.CoordinateTransformer;
 
-public class HermiteMainFrame {
+public class BezierMainFrame {
 
 	// store all point list and line list.
 	private double[][] pointList = new double[2][4];
@@ -38,9 +39,9 @@ public class HermiteMainFrame {
 
 	// Instruction Panel
 	private JPanel instructionPanel = new JPanel();
-	private JLabel titleLabel = new JLabel("Hermite 曲线");
+	private JLabel titleLabel = new JLabel("Bezier 曲线");
 	private JLabel instructionsLabel = new JLabel(
-			"请在屏幕上点四个点, 第一个点和第二个点为曲线的起点和终点。之后请在下方输入t的分割程度,默认值2000");
+			"请在屏幕上点四个点, 第一个点和最后一个点为曲线的起点和终点。之后请在下方输入t的分割程度,默认值2000");
 
 	// Status message Label initialization
 	private JLabel notificationLabel = new JLabel(
@@ -68,7 +69,7 @@ public class HermiteMainFrame {
 	// shouldn't exceed 4.
 	private int clickCount = 0;
 
-	public HermiteMainFrame() {
+	public BezierMainFrame() {
 
 		// setup Dimension
 
@@ -83,6 +84,10 @@ public class HermiteMainFrame {
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		c.addComponentListener(new ResizeListener());
+		
+
+		// add canvas to frame
+		frame.add(c, BorderLayout.CENTER);
 
 		// add instruction panel
 		instructionPanel.setLayout(new GridLayout(2, 1));
@@ -92,9 +97,6 @@ public class HermiteMainFrame {
 		instructionPanel.add(titleLabel);
 		instructionPanel.add(instructionsLabel);
 		frame.add(instructionPanel, BorderLayout.NORTH);
-
-		// add canvas to frame
-		frame.add(c, BorderLayout.CENTER);
 
 		// create button panel to hold button
 		buttonPanel.setLayout(new GridLayout(1, 4));
@@ -150,7 +152,7 @@ public class HermiteMainFrame {
 					pStart = new Point(x, y);
 				}
 
-				if (clickCount == 1) {
+				if (clickCount == 3) {
 					pEnd = new Point(x, y);
 				}
 
@@ -254,30 +256,48 @@ public class HermiteMainFrame {
 	private class DrawButtonAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			Graphics g = c.getGraphics();
+			if (clickCount == 4) {
 
-			calculatePPRR();
+				System.out.println(pointList[0].length);
 
-			HermiteCurve hc = new HermiteCurve(pointList,
-					Integer.parseInt(intervalValue.getText()));
+				Graphics g = c.getGraphics();
 
-			Point drawPoint1 = null;
+				BezierCurve hc = new BezierCurve(pointList,
+						Integer.parseInt(intervalValue.getText()));
 
-			for (int i = 0; i < hc.getInterval(); i++) {
+				Point drawPoint1 = null;
 
-				hc.calculateT();
-				// hc.getMT();
-				hc.setTMatrix();
+				for (int i = 0; i < hc.getInterval(); i++) {
 
-				double[] currentDrawPoint = hc.calculateGMT();
+					hc.calculateT();
+					// hc.getMT();
+					hc.setTMatrix();
 
-				drawPoint1 = new Point((int) currentDrawPoint[0],
-						(int) currentDrawPoint[1]);
+					double[] currentDrawPoint = hc.calculateGMT();
 
-				if (i == 0) {
-					drawPoint = pStart;
+					drawPoint1 = new Point((int) currentDrawPoint[0],
+							(int) currentDrawPoint[1]);
+
+					if (i == 0) {
+						drawPoint = pStart;
+					}
+
+					int a = CoordinateTransformer.calculateFrameX(d,
+							(int) drawPoint.getX());
+					int b = CoordinateTransformer.calculateFrameY(d,
+							(int) drawPoint.getY());
+					int c = CoordinateTransformer.calculateFrameX(d,
+							(int) drawPoint1.getX());
+					int dd = CoordinateTransformer.calculateFrameY(d,
+							(int) drawPoint1.getY());
+					g.drawLine(a, b, c, dd);
+
+					// shift the new point to old point
+					drawPoint = drawPoint1;
+					System.out.println(drawPoint.toString());
 				}
 
+				drawPoint1 = pEnd;
 				int a = CoordinateTransformer.calculateFrameX(d,
 						(int) drawPoint.getX());
 				int b = CoordinateTransformer.calculateFrameY(d,
@@ -288,22 +308,10 @@ public class HermiteMainFrame {
 						(int) drawPoint1.getY());
 				g.drawLine(a, b, c, dd);
 
-				// shift the new point to old point
-				drawPoint = drawPoint1;
-				System.out.println(drawPoint.toString());
+			} else {
+				notificationLabel.setText((4 - clickCount)
+						+ " more click needed!!");
 			}
-
-			drawPoint1 = pEnd;
-			int a = CoordinateTransformer.calculateFrameX(d,
-					(int) drawPoint.getX());
-			int b = CoordinateTransformer.calculateFrameY(d,
-					(int) drawPoint.getY());
-			int c = CoordinateTransformer.calculateFrameX(d,
-					(int) drawPoint1.getX());
-			int dd = CoordinateTransformer.calculateFrameY(d,
-					(int) drawPoint1.getY());
-			g.drawLine(a, b, c, dd);
-
 		}
 	}
 

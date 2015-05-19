@@ -1,13 +1,13 @@
-package edgeCutting;
+package drawCurve;
 
-public class Launch {
+public class LaunchBezier {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CreateShape cs = new CreateShape();
-	}
 
+		new BezierMainFrame();
+	}
 }

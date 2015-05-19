@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import transformation.MainFrame;
 import covering2.ThreeD;
+import drawCurve.BezierMainFrame;
 import drawCurve.HermiteMainFrame;
 import edgeCutting.CreateShape;
 import fillingShape.FillMainFrame;
@@ -90,7 +91,7 @@ public class CreateFrame {
 
 	private class bcurve implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
+			new BezierMainFrame();
 		}
 	}
 

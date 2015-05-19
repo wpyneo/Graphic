@@ -4,19 +4,29 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ThreeD {
 
 	private JFrame frame = new JFrame();
 	private Canvas originalC = null;
 	private Dimension d = null;
+	
+	// Instruction Panel
+	private JPanel instructionPanel = new JPanel();
+	private JLabel titleLabel = new JLabel("透视投影 与 消除隐藏面");
+	private JLabel instructionsLabel = new JLabel(
+			"清在屏幕中间的黑框中点击鼠标一次。点击后会生成一个正方体。");
 
 	public ThreeD() {
 
@@ -33,6 +43,15 @@ public class ThreeD {
 
 		// add Mouse click action
 		originalC.addMouseListener(new Positions());
+		
+		// add instruction panel
+		instructionPanel.setLayout(new GridLayout(2, 1));
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
+		titleLabel.setFont(new Font("Title", Font.BOLD, 30));
+		instructionsLabel.setHorizontalAlignment(JLabel.CENTER);
+		instructionPanel.add(titleLabel);
+		instructionPanel.add(instructionsLabel);
+		frame.add(instructionPanel, BorderLayout.NORTH);
 
 		// add panel to frame;
 		frame.add(originalC, BorderLayout.CENTER);
